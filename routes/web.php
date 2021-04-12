@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+route::group(['middleware' => ['auth']], function(){
+
+    // Rutas para el proceso de suscripcion
+	Route::group(["prefix"=>"user"],function(){
+	
+		Route::get('/crear','UserController@create')->name('subscriptions.plans');
+		Route::get('/buscar','UserController@show')->name('subscriptions.admin');
+		Route::post('/token','UserController@processSubscription')->name('subscriptions.process_subscription');
+	
+	});
+
+});

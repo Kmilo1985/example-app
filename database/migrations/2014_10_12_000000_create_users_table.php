@@ -19,6 +19,16 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('balance_total'); // Automaticamente se autoaliza cuando se registra un valor nuevo
+
+            
+            // fk
+            // $table->integer('work_balances_id')->unsigned();//
+            $table->foreignId('work_balances_id')->constrained()->on('work_balances');
+             
+            // $table->foreign('work_balances_id')->references('work_balances_id')->on('work_balances');
+            // $table->foreign('work_balances_id')->references('id')->on('work_balances');
+
             $table->rememberToken();
             $table->timestamps();
         });

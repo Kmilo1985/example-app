@@ -3,6 +3,9 @@
 // Reset state before starting test
 // POST / RESET
 // 200 OK
+use Illuminate\Http\Request;
+
+Route::post('/reset',  [ResetController::class, 'reset']);
 
 
 // GET balance for non-existing account
@@ -24,6 +27,8 @@
 // GET /balance?account_id=100
 // 200 20
 
+Route::get('/balance',[BalanceController::class,'show']);
+
 // Withdraw from non-existing account
 // POST /event {"type":"withdraw", "origin":"200", "amount":10}
 // 404 0
@@ -39,3 +44,11 @@
 // Transfer from non-existing account
 // POST /event {"type":"transfer", "origin":"200", "amount":15, "destination":"300"}
 // 404 0
+
+Route::post('/event',[EventController::class, 'store'] );
+
+Route::post('/tokens/create', function (Request $request) {
+    $token = $request->user()->createToken($request->token_name);
+
+    return ['token' => $token->plainTextToken];
+});
