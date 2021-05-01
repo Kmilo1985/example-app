@@ -73,5 +73,14 @@ POST /event {"type":"transfer", "origin":"100", "amount":15, "destination":"300"
 POST /event {"type":"transfer", "origin":"200", "amount":15, "destination":"300"}
 
 404 0
+
+
+## ejecutar
+
 ```
+php artisan serve --host localhos
+php artisan serve --host=localhost --port=8001
+
+
+
 

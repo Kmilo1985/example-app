@@ -1,9 +1,11 @@
 <?php
+use App\Http\Controllers\AutenticarController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 // Reset state before starting test
 // POST / RESET
 // 200 OK
-use Illuminate\Http\Request;
 
 Route::post('/reset',  [ResetController::class, 'reset']);
 
@@ -49,6 +51,8 @@ Route::post('/event',[EventController::class, 'store'] );
 
 Route::post('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken($request->token_name);
-
     return ['token' => $token->plainTextToken];
 });
+
+// Route::post('registro','AutenticarController@registro');
+Route::post('/registro',  [AutenticarController::class, 'registro']);
